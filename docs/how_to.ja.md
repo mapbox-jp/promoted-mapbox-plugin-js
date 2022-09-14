@@ -65,20 +65,24 @@ public reload(): void;
 ```
 // Map SDKのloadが完了することで発生するイベントです
 // PluginやPromoted SDKの各種処理はこれ以降に実行されます
-private load(event: mapboxgl.MapboxEvent): void;
+// @params { type: "load" } event
+private load(event: { type: "load"; }): void;
 
 // マップの座標をドラッグで移動することで発生するイベントです
-// {@required point: Point}
-private move(event: mapboxgl.MapMouseEvent): void;
+// @params { type: "move" } event
+private move(event: { type: "move" }): void;
 
 // マップの座標移動が終了することで発生するイベントです
 // 座標が移動するごとに新規のTilesetの広告ピンをリクエストします
-private moveend(event: any): void;
+// @params { type: "moveend" } event
+private moveend(event: { type: "moveend"; }): void;
 
 // 広告ピンをクリックすることで発生するイベントです
 // クリックによって広告カードを表示します
-private click(event: { features: Feature[] }): void;
+// @params { type: "click"; features: Feature[]; } event
+private click(event: { type: "click"; features: Feature[]; }): void;
 
 // canvas上でポインタを移動することで発生するイベントです
-private mousemove(event: { point: Point }): void;
+// @params { type: "mousemove"; point: Point; } event
+private mousemove(event: { type: "mousemove"; point: Point; }): void;
 ```
