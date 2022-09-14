@@ -91,15 +91,15 @@ class PromotedMapbox implements Promoted.MapPlugin {
     const layer = createLayer(layerId, sourceId);
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
     this._map.addLayer(layer);
-    this.eventCallback('load', event);
+    this.eventCallback('load', event as Promoted.MapPlugin.Event);
   }
 
   private move(event: mapboxgl.MapMouseEvent) {
-    this.eventCallback('move', event);
+    this.eventCallback('move', event as Promoted.MapPlugin.Event);
   }
 
   private idle(event: mapboxgl.MapboxEvent) {
-    this.eventCallback('idle', event);
+    this.eventCallback('idle', event as Promoted.MapPlugin.Event);
   }
   
   private moveend(event: mapboxgl.MapMouseEvent) {
@@ -108,20 +108,20 @@ class PromotedMapbox implements Promoted.MapPlugin {
     this.eventCallback(type, event);
   }
 
-  private click(event: mapboxgl.MapMouseEvent & Promoted.MapPlugin.Event) {
-    this.eventCallback('click', event);
+  private click(event: mapboxgl.MapMouseEvent) {
+    this.eventCallback('click', event as Promoted.MapPlugin.Event);
   }
 
   private mousemove(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event);
+    this.eventCallback('mousemove', event as Promoted.MapPlugin.Event);
   }
 
   private mousemoveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event);
+    this.eventCallback('mousemove', event as Promoted.MapPlugin.Event);
   }
 
   private mouseleaveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mouseleave', event);
+    this.eventCallback('mouseleave', event as Promoted.MapPlugin.Event);
   }
 
   /**
@@ -158,7 +158,7 @@ class PromotedMapbox implements Promoted.MapPlugin {
    * 
    * @reuqired
    */
-  private eventCallback(type: string, event?: any) {
+  private eventCallback(type: string, event: Promoted.MapPlugin.Event) {
     const eventListeners = this._eventListeners[type] ? this._eventListeners[type].slice() : [];
     for (const eventListener of eventListeners) {
       const { listener, layerId } = eventListener;
