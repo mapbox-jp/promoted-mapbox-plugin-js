@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noResolve": true,
+    "target": "esnext",
+    "paths": {
+      "apis/*":      ["./src/apis/*"],
+      "app/*":       ["./src/app/*"],
+      "atoms/*":     ["./src/app/atoms/*"],
+      "molecules/*": ["./src/app/molecules/*"],
+      "organisms/*": ["./src/app/organisms/*"],
+      "assets/*":    ["./src/assets/*"],
+      "core/*":      ["./src/core/*"],
+      "plugins/*":   ["./src/plugins/*"],
+      "src/*":       ["./src/*"],
+      "utils/*":     ["./src/utils/*"]
+    },
+    "rootDir": "src",
+    "skipLibCheck": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "typeRoots": [
+      "src/@types",
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/__tests__/**/*",
+    "node_modules"
+  ]
+}
