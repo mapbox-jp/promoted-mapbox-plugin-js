@@ -39,7 +39,7 @@ const config = [
       {
         file: 'lib/browser/index.js',
         exports: 'named',
-        name: 'PromotedMapbox',
+        name: 'PromotedPlugin',
         format: 'iife',
         sourcemap: __DEV__ ? 'inline' : '',
         globals: {
@@ -50,7 +50,7 @@ const config = [
       {
         file: 'lib/commonjs/index.js',
         exports: 'named',
-        name: 'PromotedMapbox',
+        name: 'PromotedPlugin',
         format: 'cjs',
         sourcemap: __DEV__ ? 'inline' : '',
         plugins

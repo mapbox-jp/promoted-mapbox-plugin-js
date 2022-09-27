@@ -1,5 +1,5 @@
-export = PromotedMap;
-export as namespace PromotedMap;
+export = PromotedPlugin;
+export as namespace PromotedPlugin;
 
 declare type Coordinates = {
   lng: number;
@@ -135,7 +135,7 @@ interface Feature extends mapboxgl.MapboxGeoJSONFeature {
   geometry: GeoJSON.Geometry;
 }
 
-declare namespace PromotedMap {
+declare namespace PromotedPlugin {
   type Event = {
     features?: Feature[];
     point?: Point;

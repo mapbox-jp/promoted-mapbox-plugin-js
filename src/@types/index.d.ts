@@ -132,7 +132,7 @@ interface Feature extends mapboxgl.MapboxGeoJSONFeature {
   geometry: GeoJSON.Geometry;
 }
 
-declare namespace PromotedMap {
+declare namespace PromotedPlugin {
   type Event = {
     features?: Feature[];
     point?: Point;

@@ -9,7 +9,7 @@ import {
   createSelectedTextHaloColor,
 } from 'utils/layer';
 
-class Plugin implements PromotedMap.Plugin {
+class Plugin implements PromotedPlugin.Plugin {
   /**
    * {@link _map}, which is original instance of the Map SDK.
    * 
@@ -38,7 +38,7 @@ class Plugin implements PromotedMap.Plugin {
    * 
    * @required
    */
-  private _eventListeners: PromotedMap.EventListeners = {};
+  private _eventListeners: PromotedPlugin.EventListeners = {};
 
   constructor(map: mapboxgl.Map) {
     this._map = map;
@@ -91,15 +91,15 @@ class Plugin implements PromotedMap.Plugin {
     const layer = createLayer(layerId, sourceId);
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
     this._map.addLayer(layer);
-    this.eventCallback('load', event as PromotedMap.Event);
+    this.eventCallback('load', event as PromotedPlugin.Event);
   }
 
   private move(event: mapboxgl.MapMouseEvent) {
-    this.eventCallback('move', event as PromotedMap.Event);
+    this.eventCallback('move', event as PromotedPlugin.Event);
   }
 
   private idle(event: mapboxgl.MapboxEvent) {
-    this.eventCallback('idle', event as PromotedMap.Event);
+    this.eventCallback('idle', event as PromotedPlugin.Event);
   }
   
   private moveend(event: mapboxgl.MapMouseEvent) {
@@ -109,19 +109,19 @@ class Plugin implements PromotedMap.Plugin {
   }
 
   private click(event: mapboxgl.MapMouseEvent) {
-    this.eventCallback('click', event as PromotedMap.Event);
+    this.eventCallback('click', event as PromotedPlugin.Event);
   }
 
   private mousemove(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event as PromotedMap.Event);
+    this.eventCallback('mousemove', event as PromotedPlugin.Event);
   }
 
   private mousemoveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event as PromotedMap.Event);
+    this.eventCallback('mousemove', event as PromotedPlugin.Event);
   }
 
   private mouseleaveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mouseleave', event as PromotedMap.Event);
+    this.eventCallback('mouseleave', event as PromotedPlugin.Event);
   }
 
   /**
@@ -158,7 +158,7 @@ class Plugin implements PromotedMap.Plugin {
    * 
    * @reuqired
    */
-  private eventCallback(type: string, event: PromotedMap.Event) {
+  private eventCallback(type: string, event: PromotedPlugin.Event) {
     const eventListeners = this._eventListeners[type] ? this._eventListeners[type].slice() : [];
     for (const eventListener of eventListeners) {
       const { listener, layerId } = eventListener;
