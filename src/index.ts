@@ -9,7 +9,7 @@ import {
   createSelectedTextHaloColor,
 } from 'utils/layer';
 
-class PromotedMapbox implements Promoted.MapPlugin {
+class Plugin implements PromotedMap.Plugin {
   /**
    * {@link _map}, which is original instance of the Map SDK.
    * 
@@ -38,7 +38,7 @@ class PromotedMapbox implements Promoted.MapPlugin {
    * 
    * @required
    */
-  private _eventListeners: Promoted.MapPlugin.EventListeners = {};
+  private _eventListeners: PromotedMap.EventListeners = {};
 
   constructor(map: mapboxgl.Map) {
     this._map = map;
@@ -91,15 +91,15 @@ class PromotedMapbox implements Promoted.MapPlugin {
     const layer = createLayer(layerId, sourceId);
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
     this._map.addLayer(layer);
-    this.eventCallback('load', event as Promoted.MapPlugin.Event);
+    this.eventCallback('load', event as PromotedMap.Event);
   }
 
   private move(event: mapboxgl.MapMouseEvent) {
-    this.eventCallback('move', event as Promoted.MapPlugin.Event);
+    this.eventCallback('move', event as PromotedMap.Event);
   }
 
   private idle(event: mapboxgl.MapboxEvent) {
-    this.eventCallback('idle', event as Promoted.MapPlugin.Event);
+    this.eventCallback('idle', event as PromotedMap.Event);
   }
   
   private moveend(event: mapboxgl.MapMouseEvent) {
@@ -109,19 +109,19 @@ class PromotedMapbox implements Promoted.MapPlugin {
   }
 
   private click(event: mapboxgl.MapMouseEvent) {
-    this.eventCallback('click', event as Promoted.MapPlugin.Event);
+    this.eventCallback('click', event as PromotedMap.Event);
   }
 
   private mousemove(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event as Promoted.MapPlugin.Event);
+    this.eventCallback('mousemove', event as PromotedMap.Event);
   }
 
   private mousemoveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mousemove', event as Promoted.MapPlugin.Event);
+    this.eventCallback('mousemove', event as PromotedMap.Event);
   }
 
   private mouseleaveOnLayer(event: mapboxgl.MapLayerMouseEvent) {
-    this.eventCallback('mouseleave', event as Promoted.MapPlugin.Event);
+    this.eventCallback('mouseleave', event as PromotedMap.Event);
   }
 
   /**
@@ -158,7 +158,7 @@ class PromotedMapbox implements Promoted.MapPlugin {
    * 
    * @reuqired
    */
-  private eventCallback(type: string, event: Promoted.MapPlugin.Event) {
+  private eventCallback(type: string, event: PromotedMap.Event) {
     const eventListeners = this._eventListeners[type] ? this._eventListeners[type].slice() : [];
     for (const eventListener of eventListeners) {
       const { listener, layerId } = eventListener;
@@ -325,4 +325,6 @@ class PromotedMapbox implements Promoted.MapPlugin {
   }
 }
 
-export default PromotedMapbox;
+export {
+  Plugin,
+};

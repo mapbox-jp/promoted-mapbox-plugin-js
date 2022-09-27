@@ -5,6 +5,7 @@
   "exports": {
     ".": "./lib/commonjs/index.js"
   },
+  "types": "./lib/commonjs/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mapbox-jp/promoted-mapbox-plugin-js.git"

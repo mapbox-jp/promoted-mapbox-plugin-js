@@ -60,7 +60,7 @@ export const getTileBound = (x: number, y: number, z: number): Bound => {
   };
 };
 
-export const getCornerTiles = (sw: Coordinate, ne: Coordinate, zoomLevel: number): TileBound => {
+export const getCornerTiles = (sw: Coordinates, ne: Coordinates, zoomLevel: number): TileBound => {
   const z = Math.floor(zoomLevel);
   const tsw = coordianteToTile(sw.lng, sw.lat, z);
   const tne = coordianteToTile(ne.lng, ne.lat, z);
@@ -72,7 +72,7 @@ export const getCornerTiles = (sw: Coordinate, ne: Coordinate, zoomLevel: number
   };
 };
 
-export const getQuadkeysOnBound = (sw: Coordinate, ne: Coordinate, zoomLevel: number) => {
+export const getQuadkeysOnBound = (sw: Coordinates, ne: Coordinates, zoomLevel: number) => {
   const tileBound = getCornerTiles(ne, sw, zoomLevel);
   const z = Math.floor(zoomLevel);
   const quadkeys = [];
@@ -96,7 +96,7 @@ export const coordinateToQuadkey = (lng: number, lat: number, z: number): string
   return tileToQuadkey(tileX, tileY, z);
 };
 
-export const tileToCoordinate = (x: number, y: number, z: number): Coordinate => {
+export const tileToCoordinate = (x: number, y: number, z: number): Coordinates => {
   const n = Math.pow(2, z);
   const lng = x / n * 360.0 - 180.0;
   const latRadius = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / n)));

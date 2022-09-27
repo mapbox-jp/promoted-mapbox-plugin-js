@@ -1,3 +1,6 @@
+export = PromotedMap;
+export as namespace PromotedMap;
+
 declare type Coordinates = {
   lng: number;
   lat: number;

@@ -51,7 +51,7 @@ const config = [
         file: 'lib/commonjs/index.js',
         exports: 'named',
         name: 'PromotedMapbox',
-        format: 'amd',
+        format: 'cjs',
         sourcemap: __DEV__ ? 'inline' : '',
         plugins
       }
