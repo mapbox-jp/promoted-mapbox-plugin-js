@@ -46,7 +46,6 @@ class Plugin implements PromotedPlugin.Plugin {
     this._map.on('move', this.move.bind(this));
     this._map.on('idle', this.idle.bind(this));
     this._map.on('moveend', this.moveend.bind(this));
-    this._map.on('zoomend', this.moveend.bind(this));
     this._map.on('click', layerId, this.click.bind(this));
     this._map.on('mousemove', this.mousemove.bind(this));
     this._map.on('mousemove', layerId, this.mousemoveOnLayer.bind(this));
@@ -105,6 +104,9 @@ class Plugin implements PromotedPlugin.Plugin {
   private moveend(event: mapboxgl.MapMouseEvent) {
     const isZoomend = this._preZoomLevel !== this.zoomLevel;
     const type = isZoomend ? 'zoomend' : 'moveend';
+    if (isZoomend) {
+      this._preZoomLevel = this.zoomLevel;
+    }
     this.eventCallback(type, event);
   }
 
