@@ -32,7 +32,6 @@ declare namespace Feature {
     auction_id: string;
     feature_id: string;
     cps: string;
-    promotion_type?: PromotionTypes;
     icon?: string;
     advertizer?: string;
     category?: string;
