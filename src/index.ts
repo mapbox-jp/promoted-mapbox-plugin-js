@@ -224,21 +224,14 @@ class Plugin implements PromotedPlugin.Plugin {
   }
 
   /**
-   * {@link getRenderedFeatures}, which is to get rendered features by the specific point.
-   *   If you does not need this method, but it have to be defined as a empty method and to return empty Array Object.
+   * {@link getRenderedFeaturesOnBound}, which is to get rendered features by the bound consisting of two points by the sw and ne.
    * 
-   * @param {Point} point is that to get features by this pointed out.
+   * @param {Coordinates} sw is sourth-west coordinates of the bound. 
+   * @param {Coordinates} ne is north-east coordinates of the bound. 
    * @required
    */
-  public getRenderedFeatures(point: Point): Feature[] {
-    const box: [mapboxgl.PointLike, mapboxgl.PointLike] = [
-      [point.x, point.y],
-      [point.x + 1, point.y + 1],
-    ];
-    const selectedFeatures = this._map.queryRenderedFeatures(box, {
-      layers: [layerId]
-    });
-    return selectedFeatures as Feature[];
+  public getRenderedFeaturesOnBound(_sw: Coordinates, _ne: Coordinates): Feature[] {
+    return this._map.queryRenderedFeatures(undefined, { layers: [layerId] }) as Feature[];
   }
 
   /**
