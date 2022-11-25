@@ -151,7 +151,7 @@ declare namespace PromotedPlugin {
     get map(): any;
     get zoomLevel(): number;
     public getBounds(): Bound;
-    public getRenderedFeatures(point: Point): Feature[];
+    public getRenderedFeaturesOnBound(sw: Coordinates, ne: Coordinates): Feature[];
     public on(type: string, layerId: any, listener?: any): void;
     public off(type: string, layerId: any, listener?: any): void;
     public render(
