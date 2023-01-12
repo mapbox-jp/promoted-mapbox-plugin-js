@@ -54,6 +54,15 @@ class Plugin implements PromotedPlugin.Plugin {
   }
 
   /**
+   * {@link isPromotedPlugin}, which is to recognize this instance is Promoted-Plugin's one.
+   *
+   * @required
+   */
+  get isPromotedPlugin() {
+    return true;
+  }
+
+  /**
    * {@link map}, which is to get the map instance from Publisher's SDK.
    *
    * @required
