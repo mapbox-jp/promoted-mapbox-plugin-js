@@ -148,6 +148,7 @@ declare namespace PromotedPlugin {
   };
   export class Plugin {
     constructor(map: mapboxgl.Map);
+    get isPromotedPlugin(): boolean;
     get map(): any;
     get zoomLevel(): number;
     public getBounds(): Bound;
