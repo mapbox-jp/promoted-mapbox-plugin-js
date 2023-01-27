@@ -165,5 +165,6 @@ declare namespace PromotedPlugin {
     public selectFeature(feature: Feature): void;
     public deselectLayer(): void;
     public reload(): void;
+    public reset(): void;
   }
 }

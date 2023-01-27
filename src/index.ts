@@ -94,12 +94,12 @@ class Plugin implements PromotedPlugin.Plugin {
     return this._map.getZoom();
   }
 
-  private load(event: mapboxgl.MapboxEvent) {
+  private load(event?: mapboxgl.MapboxEvent) {
     this._preZoomLevel = this._map.getZoom();
     const layer = createLayer(layerId, sourceId);
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
     this._map.addLayer(layer);
-    this.eventCallback('load', event as PromotedPlugin.Event);
+    event && this.eventCallback('load', event as PromotedPlugin.Event);
   }
 
   private move(event: mapboxgl.MapMouseEvent) {
@@ -324,6 +324,18 @@ class Plugin implements PromotedPlugin.Plugin {
    * @required
    */
   public reload() {
+    this.layer && this._map.removeLayer(layerId);
+    this.source && this._map.removeSource(sourceId);
+    this.load();
+  }
+
+  /**
+   * {@link reset}, which is to reset data, but this method is for the Client Application.
+   *   If you does not need this method, but it have to be defined as a empty method.
+   *
+   * @required
+   */
+  public reset() {
     this.layer && this._map.removeLayer(layerId);
     this.source && this._map.removeSource(sourceId);
   }
