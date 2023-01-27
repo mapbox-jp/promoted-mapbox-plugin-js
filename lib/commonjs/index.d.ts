@@ -1,3 +1,161 @@
+/// <reference types="mapbox-gl" />
+declare module 'promoted-mapbox-plugin-js' {
+  namespace PromotedPlugin {
+    type Coordinates = {
+      lng: number;
+      lat: number;
+    };
+    type Point = {
+      x: number;
+      y: number;
+    };
+    type Tile = {
+      x: number;
+      y: number;
+      z: number;
+    };
+    type Bound = {
+      ne: Coordinates;
+      nw: Coordinates;
+      se: Coordinates;
+      sw: Coordinates;
+    };
+    type TileBound = {
+      ne: Tile;
+      nw: Tile;
+      se: Tile;
+      sw: Tile;
+    };
+    namespace Feature {
+      interface Properties {
+        auction_id: string;
+        feature_id: string;
+        cps: string;
+        icon?: string;
+        advertizer?: string;
+        category?: string;
+        address_ja?: string;
+        address_en?: string;
+        address_remarks?: string;
+        name_ja?: string;
+        name_en?: string;
+        subtitle?: string;
+        summary?: string;
+        phone_number?: string;
+        promotion_banner?: string;
+        promotion_banner_width?: number;
+        promotion_banner_height?: number;
+        promotion_card?: string;
+        promotion_url?: string;
+        directions?: string;
+        lat?: string;
+        lng?: string;
+        min_zoom?: string;
+        business_hours?: string;
+        business_hours_remarks?: string;
+        external_links?: string;
+        profile?: string;
+      }
+      const PROMOTION_TYPES: {
+        readonly CARD: 'card';
+      }
+      type PromotionTypes = typeof PROMOTION_TYPES[keyof typeof PROMOTION_TYPES];
+      const EXTERNAL_LINK_TYPES: {
+        readonly LINE: 'line';
+        readonly INSTAGRAM: 'instagram';
+        readonly FACEBOOK: 'facebook';
+        readonly TWITTER: 'twitter';
+        readonly APP_STORE: 'app_store';
+        readonly PLAY_STORE: 'play_store';
+      }
+      type ExternalLinkTypes = typeof EXTERNAL_LINK_TYPES[keyof typeof EXTERNAL_LINK_TYPES];
+      type ExternalLink = {
+        type: ExternalLinkTypes;
+        url: string;
+      };
+      namespace Properties {
+        type BusinessHours = {
+          monday?: string;
+          tuesday?: string;
+          wednesday?: string;
+          thursday?: string;
+          friday?: string;
+          saturday?: string;
+          sunday?: string;
+        };
+      }
+      namespace Profile {
+        type Category = {
+          id: string;
+          name: string;
+        };
+        type Image = {
+          id: string;
+          mime_type: string;
+          url: string;
+          width: number;
+          height: number;
+        };
+        type Images = {
+          small: Image;
+          medium: Image;
+          large: Image;
+        };
+        type News = {
+          id: string;
+          title: string;
+          text: string;
+          images: Images;
+        };
+        type Product = {
+          id: string;
+          category_ids: string[];
+          title: string;
+          text: string;
+          image_url: string;
+        };
+        type Media = {
+          id: string;
+          category_ids: string[];
+          type: string;
+          title?: string;
+          images: Images;
+        };
+      }
+      type Profile = {
+        news?: boolean;
+        products?: boolean;
+        media?: boolean;
+      };
+    }
+    interface Feature extends mapboxgl.MapboxGeoJSONFeature {
+      properties: Feature.Properties;
+      geometry: GeoJSON.Geometry;
+    }
+  }
+
+  export class PromotedPlugin {
+    constructor(map: mapboxgl.Map);
+    get isPromotedPlugin(): boolean;
+    get map(): any;
+    get zoomLevel(): number;
+    public getBounds(): PromotedPlugin.Bound;
+    public getRenderedFeaturesOnBound(sw: PromotedPlugin.Coordinates, ne: PromotedPlugin.Coordinates): PromotedPlugin.Feature[];
+    public on(type: string, layerId: any, listener?: any): void;
+    public off(type: string, layerId: any, listener?: any): void;
+    public render(
+      features: PromotedPlugin.Feature[],
+      visibledFeatures: PromotedPlugin.Feature[],
+      unvisibledFeatures: PromotedPlugin.Feature[]
+    ): void;
+    public visibleLayer(): void;
+    public hideLayer(): void;
+    public selectFeature(feature: PromotedPlugin.Feature): void;
+    public deselectLayer(): void;
+    public reload(): void;
+  }
+}
+
 export = PromotedPlugin;
 export as namespace PromotedPlugin;
 
@@ -165,5 +323,6 @@ declare namespace PromotedPlugin {
     public selectFeature(feature: Feature): void;
     public deselectLayer(): void;
     public reload(): void;
+    public reset(): void;
   }
 }
