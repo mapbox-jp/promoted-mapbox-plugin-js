@@ -133,8 +133,13 @@ interface Feature extends mapboxgl.MapboxGeoJSONFeature {
 }
 
 declare namespace PromotedPlugin {
+  const CLICK_MODE: {
+    readonly CLICK: 'click';
+    readonly TOUCH: 'touch';
+  };
+  type ClickMode = typeof CLICK_MODE[keyof typeof CLICK_MODE];
   type Options = {
-    clickMode?: string;
+    clickMode?: ClickMode;
   };
   type Event = {
     features?: Feature[];
