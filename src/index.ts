@@ -8,6 +8,7 @@ import {
   createSelectedTextColor,
   createSelectedTextHaloColor,
 } from 'utils/layer';
+import { CLICK_MODE } from './helpers';
 
 class Plugin implements PromotedPlugin.Plugin {
   /**
@@ -52,7 +53,7 @@ class Plugin implements PromotedPlugin.Plugin {
     this._map.on('mouseleave', layerId, this.mouseleaveOnLayer.bind(this));
     this._map.on('styleimagemissing', this.styleImageMissing.bind(this));
 
-    if (clickMode === 'touch') {
+    if (clickMode === CLICK_MODE.TOUCH) {
       this._map.on('touchstart', layerId, this.touch.bind(this));
     } else {
       this._map.on('click', layerId, this.click.bind(this));
@@ -126,7 +127,7 @@ class Plugin implements PromotedPlugin.Plugin {
   }
 
   private touch(event: mapboxgl.MapTouchEvent) {
-    this.eventCallback('touchstart', event as PromotedPlugin.Event);
+    this.eventCallback('click', event as PromotedPlugin.Event);
   }
 
   private click(event: mapboxgl.MapMouseEvent) {
