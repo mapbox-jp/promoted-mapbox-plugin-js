@@ -135,6 +135,9 @@ interface Feature extends mapboxgl.MapboxGeoJSONFeature {
 }
 
 declare namespace PromotedPlugin {
+  type Options = {
+    clickMode?: string;
+  };
   type Event = {
     features?: Feature[];
     point?: Point;
@@ -147,7 +150,7 @@ declare namespace PromotedPlugin {
     [quadkey: string]: EventListener[];
   };
   export class Plugin {
-    constructor(map: mapboxgl.Map);
+    constructor(map: mapboxgl.Map, options?: PromotedPlugin.Options);
     get isPromotedPlugin(): boolean;
     get map(): any;
     get zoomLevel(): number;
