@@ -40,17 +40,23 @@ class Plugin implements PromotedPlugin.Plugin {
    */
   private _eventListeners: PromotedPlugin.EventListeners = {};
 
-  constructor(map: mapboxgl.Map) {
+  constructor(map: mapboxgl.Map, options: PromotedPlugin.Options = {}) {
+    const { clickMode } = options;
     this._map = map;
     this._map.on('load', this.load.bind(this));
     this._map.on('move', this.move.bind(this));
     this._map.on('idle', this.idle.bind(this));
     this._map.on('moveend', this.moveend.bind(this));
-    this._map.on('click', layerId, this.click.bind(this));
     this._map.on('mousemove', this.mousemove.bind(this));
     this._map.on('mousemove', layerId, this.mousemoveOnLayer.bind(this));
     this._map.on('mouseleave', layerId, this.mouseleaveOnLayer.bind(this));
     this._map.on('styleimagemissing', this.styleImageMissing.bind(this));
+
+    if (clickMode === 'touch') {
+      this._map.on('touchstart', layerId, this.touch.bind(this));
+    } else {
+      this._map.on('click', layerId, this.click.bind(this));
+    }
   }
 
   /**
@@ -117,6 +123,10 @@ class Plugin implements PromotedPlugin.Plugin {
       this._preZoomLevel = this.zoomLevel;
     }
     this.eventCallback(type, event);
+  }
+
+  private touch(event: mapboxgl.MapTouchEvent) {
+    this.eventCallback('touchstart', event as PromotedPlugin.Event);
   }
 
   private click(event: mapboxgl.MapMouseEvent) {
