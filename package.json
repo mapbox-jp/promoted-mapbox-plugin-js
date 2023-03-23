@@ -17,7 +17,7 @@
     "build:dev": "cross-env NODE_ENV=\"development\" rollup -c rollup.config.js"
   },
   "dependencies": {
-    "mapbox-gl": "1.13.0"
+    "mapbox-gl": "2.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -30,7 +30,7 @@
     "@rollup/plugin-commonjs": "^21.0.0",
     "@rollup/plugin-node-resolve": "^13.0.5",
     "@rollup/plugin-typescript": "^8.2.5",
-    "@types/mapbox-gl": "1.13.0",
+    "@types/mapbox-gl": "^2.7.10",
     "core-js": "^3.19.3",
     "cross-env": "^7.0.3",
     "rollup": "^2.58.0",
