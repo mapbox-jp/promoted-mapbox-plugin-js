@@ -1,6 +1,6 @@
 {
   "name": "promoted-mapbox-plugin-js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build and deploy an application to demos.mapbox.com",
   "exports": {
     ".": "./lib/commonjs/index.js"
