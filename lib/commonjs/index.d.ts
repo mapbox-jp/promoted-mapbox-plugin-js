@@ -160,7 +160,7 @@ declare namespace PromotedPlugin {
     get map(): any;
     get zoomLevel(): number;
     public getBounds(): Bound;
-    public getRenderedFeaturesOnBound(sw: Coordinates, ne: Coordinates): Feature[];
+    public getRenderedFeaturesOnBound(): Feature[];
     public on(type: string, layerId: any, listener?: any): void;
     public off(type: string, layerId: any, listener?: any): void;
     public render(
