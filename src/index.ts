@@ -52,6 +52,8 @@ class Plugin implements PromotedPlugin.Plugin {
     this._map.on('mousemove', layerId, this.mousemoveOnLayer.bind(this));
     this._map.on('mouseleave', layerId, this.mouseleaveOnLayer.bind(this));
     this._map.on('styleimagemissing', this.styleImageMissing.bind(this));
+    this._map.on('mouseenter', layerId, () => this._map.getCanvas().style.cursor = 'pointer');
+    this._map.on('mouseleave', layerId, () => this._map.getCanvas().style.cursor = 'default');
 
     if (clickMode === CLICK_MODE.TOUCH) {
       this._map.on('touchstart', layerId, this.touch.bind(this));
@@ -246,11 +248,9 @@ class Plugin implements PromotedPlugin.Plugin {
   /**
    * {@link getRenderedFeaturesOnBound}, which is to get rendered features by the bound consisting of two points by the sw and ne.
    * 
-   * @param {Coordinates} sw is sourth-west coordinates of the bound. 
-   * @param {Coordinates} ne is north-east coordinates of the bound. 
    * @required
    */
-  public getRenderedFeaturesOnBound(_sw: Coordinates, _ne: Coordinates): Feature[] {
+  public getRenderedFeaturesOnBound(): Feature[] {
     return this._map.queryRenderedFeatures(undefined, { layers: [layerId] }) as Feature[];
   }
 
