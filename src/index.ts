@@ -251,7 +251,10 @@ class Plugin implements PromotedPlugin.Plugin {
    * @required
    */
   public getRenderedFeaturesOnBound(): Feature[] {
-    return this._map.queryRenderedFeatures(undefined, { layers: [layerId] }) as Feature[];
+    if (this._map.getLayer(layerId)) {
+      return this._map.queryRenderedFeatures(undefined, { layers: [layerId] }) as Feature[];
+    }
+    return [];
   }
 
   /**
