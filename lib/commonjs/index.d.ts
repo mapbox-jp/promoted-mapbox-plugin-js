@@ -35,15 +35,12 @@ declare namespace Feature {
     icon?: string;
     advertizer?: string;
     category?: string;
-    address_ja?: string;
-    address_en?: string;
+    address?: string;
     address_remarks?: string;
-    name_ja?: string;
-    name_en?: string;
+    name?: string;
     subtitle?: string;
     summary?: string;
     phone_number?: string;
-    promotion_banner?: string;
     promotion_banner_width?: number;
     promotion_banner_height?: number;
     promotion_card?: string;
@@ -56,6 +53,8 @@ declare namespace Feature {
     business_hours_remarks?: string;
     external_links?: string;
     profile?: string;
+    banner_image?: string;
+    banner_video?: string;
   }
   const PROMOTION_TYPES: {
     readonly CARD: 'card';
