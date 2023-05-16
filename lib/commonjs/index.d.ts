@@ -55,6 +55,7 @@ declare namespace Feature {
     profile?: string;
     banner_image?: string;
     banner_video?: string;
+    banner_url?: string;
   }
   const PROMOTION_TYPES: {
     readonly CARD: 'card';
