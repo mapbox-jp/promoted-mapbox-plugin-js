@@ -8,7 +8,7 @@ export const createLayer = (id: string, sourceId: string): mapboxgl.SymbolLayer 
     'icon-image': ['get', 'icon'],
     'icon-size': [
       'interpolate',
-      ['linear', 1.5],
+      ['linear'],
       ['zoom'],
       17, 0.5, // zoom is 17 (or less)    -> icon size will be 0.5
       20, 1.0, // zoom is 20 (or greater) -> icon size will be 1.0
@@ -18,7 +18,7 @@ export const createLayer = (id: string, sourceId: string): mapboxgl.SymbolLayer 
     'text-anchor': 'top',
     'text-size': [
       'interpolate',
-      ['linear', 1.5],
+      ['linear'],
       ['zoom'],
       17, 9,  // zoom is 17 (or less)    -> text size will be 9
       20, 12, // zoom is 20 (or greater) -> text size will be 12
