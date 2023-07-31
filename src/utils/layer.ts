@@ -14,7 +14,30 @@ export const createLayer = (id: string, sourceId: string): mapboxgl.SymbolLayer 
       20, 1.1, // zoom is 20 (or greater) -> icon size will be 1.1
     ],
     'icon-anchor': 'bottom',
-    'text-field': ['get', 'name'],
+    //'text-field': ['get', 'name'],
+    //'text-anchor': 'top',
+    //'text-size': [
+    //  'interpolate',
+    //  ['linear'],
+    //  ['zoom'],
+    //  17, 11.0, // zoom is 17 (or less)    -> text size will be 11.0
+    //  20, 15.0, // zoom is 20 (or greater) -> text size will be 15.0
+    //]
+    'text-field': [
+      'format',
+      ['get', 'name'],
+      { 'font-scale': 1.2 },
+      '\n',
+      {},
+      ['get', 'name'],
+      {
+        'font-scale': 0.8,
+        'text-font': [
+        'literal',
+          ['DIN Offc Pro Italic', 'Arial Unicode MS Regular']
+        ]
+      }
+    ],
     'text-anchor': 'top',
     'text-size': [
       'interpolate',
