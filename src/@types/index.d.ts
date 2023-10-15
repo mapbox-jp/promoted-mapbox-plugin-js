@@ -140,6 +140,7 @@ declare namespace PromotedPlugin {
   type ClickMode = typeof CLICK_MODE[keyof typeof CLICK_MODE];
   type Options = {
     clickMode?: ClickMode;
+    remoteConfigUrl?: string;
   };
   type Event = {
     features?: Feature[];

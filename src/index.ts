@@ -41,8 +41,10 @@ class Plugin implements PromotedPlugin.Plugin {
    */
   private _eventListeners: PromotedPlugin.EventListeners = {};
 
+  private remoteConfigUrl: string | undefined;
+
   constructor(map: mapboxgl.Map, options: PromotedPlugin.Options = {}) {
-    const { clickMode } = options;
+    const { clickMode, remoteConfigUrl } = options;
     this._map = map;
     this._map.on('load', this.load.bind(this));
     this._map.on('move', this.move.bind(this));
@@ -60,6 +62,8 @@ class Plugin implements PromotedPlugin.Plugin {
     } else {
       this._map.on('click', layerId, this.click.bind(this));
     }
+
+    this.remoteConfigUrl = remoteConfigUrl;
   }
 
   /**
@@ -103,9 +107,9 @@ class Plugin implements PromotedPlugin.Plugin {
     return this._map.getZoom();
   }
 
-  private load(event?: mapboxgl.MapboxEvent) {
+  private async load(event?: mapboxgl.MapboxEvent) {
     this._preZoomLevel = this._map.getZoom();
-    const layer = createLayer(layerId, sourceId);
+    const layer = await createLayer(layerId, sourceId, this.remoteConfigUrl);
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
     this._map.addLayer(layer);
     event && this.eventCallback('load', event as PromotedPlugin.Event);
