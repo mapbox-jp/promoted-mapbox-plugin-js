@@ -10,12 +10,12 @@ export const createLayer = async (id: string, sourceId: string, remoteConfigUrl?
 
     // zoom is 17 (or less)    -> text size will be 11.0
     // zoom is 20 (or greater) -> text size will be 15.0
-    text_size: [17, 13.25, 22, 18],
+    text_size: [17, 11.0, 20, 15.0],
 
     text_opacity: 14,
     text_font: ["Noto Sans CJK JP Medium"],
-    text_halo_color: "#ffffff",
-    text_halo_width: 1.2,
+    text_halo_color: COLORS.FONT_HALO_COLOR_DARK, // "#ffffff",
+    text_halo_width: 1.0, // 1.2,
     text_justify: "left" as "center" | "left" | "right" | "auto",
     // 'darkmode' is used in mobile app but not in web
     //darkmode: {
@@ -23,8 +23,6 @@ export const createLayer = async (id: string, sourceId: string, remoteConfigUrl?
     //},
   };
 
-  //const DEFAULT_ICON_SIZE = [17, 0.8, 20, 1.1];
-  //const DEFAULT_TEXT_SIZE = [17, 11.0, 20, 15.0];
 
   const remoteConfig = await fetchRemoteConfig(remoteConfigUrl);
   const config = {...defaultConfig, ...remoteConfig};
@@ -57,8 +55,6 @@ export const createLayer = async (id: string, sourceId: string, remoteConfigUrl?
       'icon-halo-color': COLORS.FONT_COLOR_DARK,
       'icon-halo-width': 1.5,
       'text-color': COLORS.FONT_COLOR_DARK,
-      //'text-halo-color': COLORS.FONT_HALO_COLOR_DARK,
-      //'text-halo-width': 1.0,
       'text-translate': [0, 2],
       'text-translate-anchor': 'viewport',
       'text-opacity': [
