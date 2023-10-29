@@ -14,12 +14,12 @@ export const createLayer = async (id: string, sourceId: string, remoteConfigUrl?
 
     text_opacity: 14,
     text_font: ["Noto Sans CJK JP Medium"],
-    text_halo_color: COLORS.FONT_HALO_COLOR_DARK, // "#ffffff",
+    text_halo_color_rgba: COLORS.FONT_HALO_COLOR_DARK, // "#ffffff",
     text_halo_width: 1.0, // 1.2,
     text_justify: "left" as "center" | "left" | "right" | "auto",
     // 'darkmode' is used in mobile app but not in web
     //darkmode: {
-    //  text_halo_color: "#2A3241",
+    //  text_halo_color_rgba: "#2A3241",
     //},
   };
 
@@ -64,7 +64,7 @@ export const createLayer = async (id: string, sourceId: string, remoteConfigUrl?
         config.text_opacity,
         1
       ],
-      'text-halo-color': config.text_halo_color,
+      'text-halo-color': config.text_halo_color_rgba,
       'text-halo-width': config.text_halo_width,
     },
     filter: [
