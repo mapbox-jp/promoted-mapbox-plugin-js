@@ -42,6 +42,7 @@ class Plugin implements PromotedPlugin.Plugin {
   private _eventListeners: PromotedPlugin.EventListeners = {};
 
   private remoteConfigUrl: string | undefined;
+  private pinLayer: mapboxgl.SymbolLayer | undefined;
 
   constructor(map: mapboxgl.Map, options: PromotedPlugin.Options = {}) {
     const { clickMode, remoteConfigUrl } = options;
@@ -109,9 +110,11 @@ class Plugin implements PromotedPlugin.Plugin {
 
   private async load(event?: mapboxgl.MapboxEvent) {
     this._preZoomLevel = this._map.getZoom();
-    const layer = await createLayer(layerId, sourceId, this.remoteConfigUrl);
+    if (!this.pinLayer) {
+      this.pinLayer = await createLayer(layerId, sourceId, this.remoteConfigUrl);
+    }
     this._map.addSource(sourceId, GEOJSON_TEMPLATE);
-    this._map.addLayer(layer);
+    this._map.addLayer(this.pinLayer);
     event && this.eventCallback('load', event as PromotedPlugin.Event);
   }
 
@@ -341,10 +344,10 @@ class Plugin implements PromotedPlugin.Plugin {
    *
    * @required
    */
-  public reload() {
+  public async reload() {
     this.layer && this._map.removeLayer(layerId);
     this.source && this._map.removeSource(sourceId);
-    this.load();
+    await this.load();
   }
 
   /**
