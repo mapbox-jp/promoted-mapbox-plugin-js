@@ -183,6 +183,35 @@ class Plugin implements PromotedPlugin.Plugin {
     }
   }
 
+  private loadImageAsPromise(url: string) {
+    return new Promise((resolve, reject) => {
+      this._map.loadImage(url, (error, image) => {
+        if (image != null) {
+          resolve(image);
+        } else {
+          reject(error);
+        }
+      });
+    });
+  }
+  private async loadFeatureImages(features: Feature[]) {
+    const imgUrlSet = new Set();
+    for (const feature of features) {
+      const icon = feature.properties.icon ?? '';
+      if (isUrl(icon) && !this._map.hasImage(icon)) {
+        imgUrlSet.add(feature.properties.icon);
+      }
+    }
+    const imageUrls = [...imgUrlSet];
+    const images = await Promise.all(
+        imageUrls.map(url => this.loadImageAsPromise(url)));
+    for (const [i, url] of imageUrls.entries()) {
+      if (!this._map.hasImage(url)) {
+        this._map.addImage(url, images[i]);
+      }
+    }
+  }
+
   /**
    * {@link eventCallback}, which is to trigger the callbacks from Map SDK, to the Promoted SDK.
    * 
@@ -273,11 +302,12 @@ class Plugin implements PromotedPlugin.Plugin {
    * @param {Feature[]} unvisibledFeatures is the features they change to be unvisible, by moving out of the bound, or zooming in or out to target visible features.
    * @required
    */
-  public render(
+  public async render(
     features: Feature[],
     _visibledFeatures: Feature[],
     _unvisibledFeatures: Feature[]
   ) {
+    await this.loadFeatureImages(features);
     this.source && this.source.setData({
       type: 'FeatureCollection',
       features,
