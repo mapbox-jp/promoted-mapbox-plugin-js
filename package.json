@@ -30,7 +30,7 @@
     "@types/mapbox-gl": "^2.7.10",
     "core-js": "^3.19.3",
     "cross-env": "^7.0.3",
-    "mapbox-gl": "2.12.1",
+    "mapbox-gl": "^3.0.1",
     "rollup": "^2.58.0",
     "rollup-plugin-polyfill-node": "^0.7.0",
     "rollup-plugin-replace": "^2.2.0",
